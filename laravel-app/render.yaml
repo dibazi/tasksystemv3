@@ -1,0 +1,27 @@
+services:
+  - name: web
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install
+      npm install
+      npm run prod
+      php artisan migrate --force
+    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    env:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:m3/RW57oWG7k5QVKENab8yCGtiMUN5+gjW4W6VxxsJw=
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: db4free.net
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: nndb_cloud_db123
+      - key: DB_USERNAME
+        value: undb_cloud_db123
+      - key: DB_PASSWORD
+        value: ndb_cloud_db123
