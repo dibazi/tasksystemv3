@@ -24,16 +24,6 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700">Assign By</label>
-                        <div class="mt-1 text-gray-900">{{ getUserName(task.assign_by) }}</div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700">Assign To</label>
-                        <div class="mt-1 text-gray-900">{{ getUserName(task.assign_to) }}</div>
-                    </div>
-
-                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">Deadline</label>
                         <div class="mt-1 text-gray-900">{{ task.dead_line }}</div>
                     </div>
@@ -71,15 +61,9 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 // Get props from the Inertia page
 const { props } = usePage();
 const task = ref(props.task);
-const users = ref(props.users);
 
 const Tasks = () => {
     Inertia.get('/tasks');
-};
-
-const getUserName = (userId) => {
-  const user = users.value[userId];
-  return user ? user.name : 'Unknown User';
 };
 
 const deleteTask = (id) => {

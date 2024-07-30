@@ -12,18 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('assign_by'); // Assuming this references a user ID
-            $table->unsignedBigInteger('assign_to'); // Assuming this references a user ID
+            $table->id(); // Auto-incrementing primary key
             $table->date('dead_line'); // Using date type for deadlines
             $table->text('description'); // Using text type for potentially longer descriptions
-            $table->string('status');
-            $table->timestamps();
-
-            // Adding foreign key constraints
-            $table->foreign('assign_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('assign_to')->references('id')->on('users')->onDelete('cascade');
+            $table->string('status'); // Using string type for status
+            $table->timestamps(); // Created at and updated at timestamps
         });
+        
     }
 
     /**

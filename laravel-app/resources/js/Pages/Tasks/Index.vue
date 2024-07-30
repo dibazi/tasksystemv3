@@ -6,7 +6,7 @@
 
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
-                <a href="#" @click.prevent="Tasks" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="margin-bottom: 10px;">Create Task</a>
+                <a href="tasks/create" @click.prevent="Tasks" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="margin-bottom: 10px;">Create Task</a>
             </div>
 
             <!-- Search Form -->
@@ -25,8 +25,6 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assign By</th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assign To</th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
@@ -36,8 +34,6 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     <tr v-for="task in tasks.data" :key="task.id">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ task.id }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ getUserName(task.assign_by) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ getUserName(task.assign_to) }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ task.dead_line }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ task.status }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ truncate(task.description, 10) }}</td>
@@ -82,7 +78,6 @@ import { Inertia } from '@inertiajs/inertia';
 
 const { props } = usePage();
 const tasks = ref(props.tasks);
-const users = ref(props.users);
 const searchQuery = ref('');
 const truncate = (text, length) => text.length <= length ? text : text.substring(0, length) + '...';
 
@@ -111,14 +106,8 @@ const fetchTasks = (url) => {
     }
 };
 
-const getUserName = (userId) => {
-  const user = users.value[userId];
-  return user ? user.name : 'Unknown User';
-};
-
 watchEffect(() => {
     tasks.value = props.tasks;
-    users.value = props.users;
 });
 </script>
 

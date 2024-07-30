@@ -10,16 +10,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <form @submit.prevent="submit">
-                        <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="assign_to" class="block font-medium text-sm text-gray-700">Assign to</label>
-                            <select v-model="form.assign_to" id="assign_to" class="form-select rounded-md shadow-sm mt-1 block w-1/2">
-                                <option value="">Select a user</option>
-                                <option v-for="user in users" :key="user.id" :value="user.id">
-                                    {{ user.name }}
-                                </option>
-                            </select>
-                            <p v-if="errors.assign_to" class="text-sm text-red-600">{{ errors.assign_to }}</p>
-                        </div>
+
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="dead_line" class="block font-medium text-sm text-gray-700">Deadline</label>
